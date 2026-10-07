@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hunter's Codex — Bug Bounty Field Manual</title>
+<meta name="description" content="A living, testable checklist for bug bounty hunting — what to test, how to test it, and when it's actually worth reporting.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=50 cy=50 r=45 fill=%22%2300e0ff%22/></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>try{var t=localStorage.getItem('codex-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body data-realm="cap">
+<canvas class="realm-canvas" data-realm-canvas aria-hidden="true"></canvas>
+
+<nav class="site-nav">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"></span>
+      <span>The Hunter's Codex<small>Field Manual</small></span>
+    </a>
+    <div class="nav-links" data-nav-links>
+      <a href="index.html" class="active">Home</a>
+      <a href="get-started.html">Get Started</a>
+      <a href="categories/low-hanging-fruits-1.html">LHF · Part 1</a>
+      <a href="categories/low-hanging-fruits-2.html">LHF · Part 2</a>
+      <a href="categories/low-hanging-fruits-3.html">LHF · Part 3</a>
+      <a href="categories/broken-access-control.html">Access Control</a>
+      <a href="categories/security-misconfiguration.html">Misconfiguration</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle light/dark theme">☀</button>
+      <button class="nav-toggle" data-nav-toggle aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="rift" aria-hidden="true"></div>
+  <div class="rift-ring" aria-hidden="true"></div>
+  <div class="embers" data-embers aria-hidden="true"></div>
+  <div class="container">
+    <span class="eyebrow"><span class="dot"></span> First-Strike Protocol · v1</span>
+    <h1>Hunt with method.<br>Report with <span class="accent">proof.</span></h1>
+    <p class="hero-sub lede">Every vulnerability class worth checking on a new target, written the way you'd actually want it mid-engagement — what it is, how to find it, the exact commands and dorks, and the line between a real finding and noise.</p>
+    <div class="hero-actions">
+      <a href="get-started.html" class="btn btn-primary">Get Started →</a>
+      <a href="categories/low-hanging-fruits-1.html" class="btn btn-ghost">Browse the Codex</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><b>20</b><span>Documented checks</span></div>
+      <div class="stat"><b>05</b><span>Active directories</span></div>
+      <div class="stat"><b>30+</b><span>Tools &amp; commands</span></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="dot"></span> The directories</span>
+      <h2>Pick a surface, start testing</h2>
+      <p>Each directory is a self-contained set of checks. Every entry follows the same shape — description, impact, severity, exact reproduction steps, extra tooling, and a clear call on when it's actually worth filing a report.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <a href="categories/low-hanging-fruits-1.html" class="dir-card">
+        <span class="tag">01 · GAMMA PROTOCOL</span>
+        <h3>Low Hanging Fruits — Part 1</h3>
+        <p>Origin IP disclosure, directory listing, session invalidation, cookie reuse, SPF, and application-layer DoS.</p>
+        <div class="meta"><span>7 checks</span><span>Misconfig · Auth</span></div>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+      <a href="categories/low-hanging-fruits-2.html" class="dir-card">
+        <span class="tag">02 · REPULSOR ARRAY</span>
+        <h3>Low Hanging Fruits — Part 2</h3>
+        <p>HTML injection, weak passwords, email verification bypass, reset-token reuse, OAuth confusion, broken link hijacking.</p>
+        <div class="meta"><span>6 checks</span><span>Auth · OAuth</span></div>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+      <a href="categories/low-hanging-fruits-3.html" class="dir-card">
+        <span class="tag">03 · VIBRANIUM VAULT</span>
+        <h3>Low Hanging Fruits — Part 3</h3>
+        <p>Improper output neutralization, format-string / SSTI, stack trace &amp; version disclosure, session fixation.</p>
+        <div class="meta"><span>4 checks</span><span>Injection · Session</span></div>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+      <a href="categories/broken-access-control.html" class="dir-card">
+        <span class="tag">04 · BIFROST PROTOCOL</span>
+        <h3>Broken Access Control</h3>
+        <p>CSRF — forging state-changing requests — and IDOR/BOLA, where the server trusts a client-supplied object ID.</p>
+        <div class="meta"><span>2 checks</span><span>CSRF · IDOR</span></div>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+      <a href="categories/security-misconfiguration.html" class="dir-card">
+        <span class="tag">05 · VARIANT BRANCH</span>
+        <h3>Security Misconfiguration</h3>
+        <p>Subdomain takeover — dangling DNS records pointing at third-party resources anyone can claim.</p>
+        <div class="meta"><span>1 check</span><span>DNS · Recon</span></div>
+        <span class="go" aria-hidden="true">↗</span>
+      </a>
+      <div class="dir-card soon">
+        <span class="tag">06 · COMING SOON</span>
+        <h3>Injection Deep Dive</h3>
+        <p>SQLi, NoSQLi, SSRF, XXE, and request smuggling beyond the login-page basics.</p>
+        <div class="meta"><span>Planned</span></div>
+      </div>
+      <div class="dir-card soon">
+        <span class="tag">07 · COMING SOON</span>
+        <h3>API &amp; Business Logic</h3>
+        <p>Rate-limit gaps, race conditions, workflow bypasses, mass assignment.</p>
+        <div class="meta"><span>Planned</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="panel" style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
+      <div style="max-width:52ch;">
+        <h3 style="margin-bottom:8px;">New to a target? Start on the Get Started page.</h3>
+        <p style="margin:0;">Scope rules, the severity scale used throughout the Codex, and the checklist mechanics — before you run a single command.</p>
+      </div>
+      <a href="get-started.html" class="btn btn-primary">Read the ground rules →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>The Hunter's Codex — a personal, living checklist. Built for authorized testing only.</p>
+    <p>Progress is tracked locally in your browser — nothing leaves this page.</p>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Started | The Hunter's Codex</title>
+<meta name="description" content="How to use the Codex — methodology, severity legend, and rules of engagement for authorized bug bounty testing.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=50 cy=50 r=45 fill=%22%2300e0ff%22/></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>try{var t=localStorage.getItem('codex-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body>
+<canvas class="realm-canvas" data-realm-canvas aria-hidden="true"></canvas>
+
+<nav class="site-nav">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"></span>
+      <span>The Hunter's Codex<small>Field Manual</small></span>
+    </a>
+    <div class="nav-links" data-nav-links>
+      <a href="index.html">Home</a>
+      <a href="get-started.html" class="active">Get Started</a>
+      <a href="categories/low-hanging-fruits-1.html">LHF · Part 1</a>
+      <a href="categories/low-hanging-fruits-2.html">LHF · Part 2</a>
+      <a href="categories/low-hanging-fruits-3.html">LHF · Part 3</a>
+      <a href="categories/broken-access-control.html">Access Control</a>
+      <a href="categories/security-misconfiguration.html">Misconfiguration</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle light/dark theme">☀</button>
+      <button class="nav-toggle" data-nav-toggle aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Codex</a> / Get Started</div>
+    <h1 style="font-size:clamp(2rem,4.4vw,3.2rem);">Before you <span style="color:var(--accent)">open a target</span></h1>
+    <p class="lede" style="margin-top:14px;max-width:62ch;">Four things worth two minutes each: how the checklist is meant to be used, what the severity tags actually mean, the rules every entry in this Codex assumes you're following, and how it grows.</p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="grid grid-2">
+
+      <div class="panel">
+        <h3>1 — How to work through a directory</h3>
+        <p>Each directory is ordered roughly by how cheap the check is to run. Open the entries, work top to bottom on a fresh target, and use the checkbox on each one to mark it tested — your progress is saved in this browser via <code>localStorage</code>, per directory, so you can close the tab and pick back up later.</p>
+        <p style="margin-bottom:0;">Every entry follows the same five sections: <strong>Description</strong> (what the bug is), <strong>Impact</strong> (why it matters), <strong>Severity</strong> (realistic range, not a worst-case fantasy), <strong>Steps to Reproduce</strong> (exact commands/payloads), and <strong>Reporting Guidance</strong> — read that last section before you file anything. It's written to stop duplicate/informational submissions as often as it is to encourage good ones.</p>
+      </div>
+
+      <div class="panel">
+        <h3>2 — Severity legend</h3>
+        <p>Used consistently across every entry, loosely CVSS-flavoured but written for realistic bug-bounty triage rather than a worst-case theoretical score:</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+          <div><span class="badge sev-critical">CRITICAL</span> — direct path to full compromise: RCE, auth bypass, mass account takeover.</div>
+          <div><span class="badge sev-high">HIGH</span> — serious, usually single-account takeover or major data exposure.</div>
+          <div><span class="badge sev-medium">MEDIUM</span> — real impact, but needs a condition or chain to matter.</div>
+          <div><span class="badge sev-low">LOW</span> — genuine but limited; often a hygiene/hardening gap.</div>
+          <div><span class="badge sev-info">INFO</span> — worth knowing, rarely worth a standalone report.</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>3 — Rules every entry assumes</h3>
+        <ul style="color:var(--ink-dim);font-size:0.95rem;">
+          <li>Only test targets you're explicitly authorized for — an active bug bounty or VDP scope, or your own infrastructure.</li>
+          <li>Read the program's scope and policy <em>first</em> — DoS, social engineering, and physical testing are commonly excluded, and several entries here (long-password DoS, SPF) are frequently affected by that.</li>
+          <li>Use your own test accounts for anything destructive. Never run write/delete/reset actions against a real victim's account or data to "prove" a bug.</li>
+          <li>Stop at proof. Confirming you can read one record, not the whole database, is enough for a report — mass data extraction isn't necessary and usually isn't welcome.</li>
+          <li>Report through the program's disclosed channel, respect embargo/disclosure timelines, and never discuss an unresolved finding publicly.</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h3>4 — How this grows</h3>
+        <p>Five directories are live now — the three Low Hanging Fruits parts, Broken Access Control (CSRF, IDOR/BOLA), and Security Misconfiguration (subdomain takeover). The home page's remaining roadmap cards (Injection Deep Dive, API &amp; Business Logic) are next. Each new directory drops in as its own file under <code>/categories/</code> with a matching <code>/assets/js/data-*.js</code> — same content shape as everything above (plus an optional decision tree and Burp walkthrough section for the deeper classes), so the checklist stays consistent as it expands.</p>
+        <p style="margin-bottom:0;">If you're reading this from the repo: see <code>README.md</code> for the exact steps to add a new directory or append an entry to an existing one.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="panel" style="text-align:center;">
+      <h3 style="margin-bottom:10px;">Ready.</h3>
+      <p style="margin:0 auto 22px;">Start with recon — it consistently pays off fastest.</p>
+      <a href="categories/low-hanging-fruits-1.html" class="btn btn-primary">Open Low Hanging Fruits — Part 1 →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>The Hunter's Codex — a personal, living checklist. Built for authorized testing only.</p>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
