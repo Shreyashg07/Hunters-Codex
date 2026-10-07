@@ -662,3 +662,31 @@ p code, li code{
 .tree-node.tree-fail{ color:#ff7590; font-weight:600; }
 .tree-node.tree-pass{ color:var(--green); font-weight:600; }
 .tree-sub{ border-left:2px dashed var(--hairline-2); margin:8px 0 0 4px; padding-left:16px; }
+
+/* ---------------- REFERENCE CHECKLIST ----------------
+   Dense, scannable sub-checklists pulled wholesale from source
+   material — columns on wide screens, single column on mobile.
+   ------------------------------------------------------- */
+.checklist{
+  margin:12px 0 20px; background:rgba(var(--accent-rgb),0.05);
+  border:1px solid var(--hairline); border-radius:8px; padding:16px 18px;
+}
+.checklist-title{
+  font-family:var(--f-mono); font-size:0.78rem; font-weight:600; color:var(--ink);
+  margin-bottom:10px; display:flex; align-items:center; gap:8px;
+}
+.checklist-group{ margin-bottom:14px; }
+.checklist-group:last-child{ margin-bottom:0; }
+.checklist-group-title{
+  font-family:var(--f-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.09em;
+  color:var(--accent); margin-bottom:6px;
+}
+.checklist ul{ list-style:none; margin:0; padding:0; columns:2; column-gap:22px; }
+.checklist.single ul{ columns:1; }
+.checklist li{
+  display:flex; align-items:flex-start; gap:7px; font-size:0.85rem; color:var(--ink-dim);
+  padding:2.5px 0; break-inside:avoid;
+}
+.checklist li::before{ content:"☐"; color:var(--ink-faint); flex-shrink:0; line-height:1.5; }
+.checklist code{ font-size:0.86em; }
+@media (max-width:640px){ .checklist ul{ columns:1; } }
