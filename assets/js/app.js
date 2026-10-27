@@ -77,7 +77,7 @@
       cs.getPropertyValue('--accent3-rgb').trim() || '255,56,96'
     ];
 
-    var W, H, DPR, particles, centers, shootingStar, lightning, echoes, t = 0;
+    var W, H, DPR, particles, centers, shootingStar, lightning, echoes, portals, t = 0;
 
     function resize(){
       DPR = Math.min(window.devicePixelRatio || 1, 2);
@@ -101,6 +101,7 @@
       shootingStar = null;
       lightning = null;
       echoes = [];
+      portals = [];
     }
 
     function makeParticle(spawnEdge){
@@ -225,6 +226,28 @@
           echoes.forEach(function(e){ e.x += e.vx; e.y += e.vy; e.life++; });
           echoes = echoes.filter(function(e){ return e.life < e.maxLife; });
           echoes.forEach(function(e){ drawParticle(e, 0.3 * (1 - e.life / e.maxLife)); });
+        }
+
+        if(realm === 'strange'){
+          /* brief portal sigils: a ring blooms open at a random point then closes */
+          if(portals.length < 2 && Math.random() < 0.012){
+            portals.push({ x: W * 0.15 + Math.random() * W * 0.7, y: H * 0.15 + Math.random() * H * 0.7, life: 0, maxLife: 90 });
+          }
+          portals.forEach(function(p){ p.life++; });
+          portals = portals.filter(function(p){ return p.life < p.maxLife; });
+          portals.forEach(function(p){
+            var pt = p.life / p.maxLife;
+            var radius = 10 + Math.sin(pt * Math.PI) * 46;
+            var alpha = Math.sin(pt * Math.PI) * 0.8;
+            ctx.shadowColor = 'rgba(' + palette[0] + ',0.8)'; ctx.shadowBlur = 14;
+            ctx.strokeStyle = 'rgba(' + palette[2] + ',' + alpha.toFixed(3) + ')';
+            ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.arc(p.x, p.y, radius, 0, Math.PI * 2); ctx.stroke();
+            ctx.strokeStyle = 'rgba(' + palette[0] + ',' + (alpha * 0.6).toFixed(3) + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.arc(p.x, p.y, radius * 0.6, 0, Math.PI * 2); ctx.stroke();
+            ctx.shadowBlur = 0;
+          });
         }
 
         if(realm === 'cap'){

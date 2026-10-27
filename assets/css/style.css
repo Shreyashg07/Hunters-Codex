@@ -107,6 +107,11 @@ body[data-realm="loki"]{
   --accent:#23d9a0; --accent-2:#c9a227; --accent-3:#8b5fe0;
   --accent-rgb:35,217,160; --accent2-rgb:201,162,39; --accent3-rgb:139,95,224;
 }
+/* Injection — Mirror Dimension: portal amber / mystic ruby / rim cyan */
+body[data-realm="strange"]{
+  --accent:#ffa94d; --accent-2:#d6336c; --accent-3:#22d3ee;
+  --accent-rgb:255,169,77; --accent2-rgb:214,51,108; --accent3-rgb:34,211,238;
+}
 
 /* ---------------- REALM BACKGROUND ART ----------------
    Full-page, fixed, behind everything, pointer-events:none.
@@ -150,6 +155,12 @@ body[data-realm="loki"]{
     repeating-linear-gradient(28deg, rgba(35,217,160,0.05) 0px, rgba(35,217,160,0.05) 1px, transparent 1px, transparent 64px),
     repeating-linear-gradient(-72deg, rgba(139,95,224,0.045) 0px, rgba(139,95,224,0.045) 1px, transparent 1px, transparent 80px),
     radial-gradient(circle at 70% 30%, rgba(201,162,39,0.08), transparent 38%);
+}
+body[data-realm="strange"]{
+  --realm-pattern:
+    repeating-radial-gradient(circle at 50% 42%, rgba(255,169,77,0.09) 0px, rgba(255,169,77,0.09) 1px, transparent 1px, transparent 46px),
+    repeating-radial-gradient(circle at 50% 42%, rgba(34,211,238,0.06) 0px, rgba(34,211,238,0.06) 1px, transparent 1px, transparent 23px),
+    radial-gradient(circle at 50% 42%, rgba(214,51,108,0.10), transparent 40%);
 }
 body::before{
   content:"";
