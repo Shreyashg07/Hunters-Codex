@@ -112,6 +112,11 @@ body[data-realm="strange"]{
   --accent:#ffa94d; --accent-2:#d6336c; --accent-3:#22d3ee;
   --accent-rgb:255,169,77; --accent2-rgb:214,51,108; --accent3-rgb:34,211,238;
 }
+/* API & Business Logic — Velocity: speed-blue / silver streak / spark gold */
+body[data-realm="quicksilver"]{
+  --accent:#38bdf8; --accent-2:#e2e8f0; --accent-3:#facc15;
+  --accent-rgb:56,189,248; --accent2-rgb:226,232,240; --accent3-rgb:250,204,21;
+}
 
 /* ---------------- REALM BACKGROUND ART ----------------
    Full-page, fixed, behind everything, pointer-events:none.
@@ -161,6 +166,12 @@ body[data-realm="strange"]{
     repeating-radial-gradient(circle at 50% 42%, rgba(255,169,77,0.09) 0px, rgba(255,169,77,0.09) 1px, transparent 1px, transparent 46px),
     repeating-radial-gradient(circle at 50% 42%, rgba(34,211,238,0.06) 0px, rgba(34,211,238,0.06) 1px, transparent 1px, transparent 23px),
     radial-gradient(circle at 50% 42%, rgba(214,51,108,0.10), transparent 40%);
+}
+body[data-realm="quicksilver"]{
+  --realm-pattern:
+    repeating-linear-gradient(4deg, transparent 0px, transparent 54px, rgba(56,189,248,0.07) 55px, transparent 58px),
+    repeating-linear-gradient(-2deg, transparent 0px, transparent 90px, rgba(226,232,240,0.05) 91px, transparent 93px),
+    radial-gradient(ellipse 700px 240px at 80% 60%, rgba(250,204,21,0.06), transparent 60%);
 }
 body::before{
   content:"";

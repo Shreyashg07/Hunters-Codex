@@ -121,6 +121,11 @@
         orbitSpeed: (0.1 + Math.random() * 0.25) * (Math.random() < 0.5 ? -1 : 1)
       };
       if(realm === 'hulk') p.vy = -Math.abs(p.vy) - 0.05; /* gamma motes drift up */
+      if(realm === 'quicksilver'){
+        p.vx = (Math.random() < 0.5 ? -1 : 1) * (2.5 + Math.random() * 3.5);
+        p.vy *= 0.15;
+        p.prevX = p.x; p.prevY = p.y;
+      }
       return p;
     }
 
@@ -157,15 +162,27 @@
           ctx.beginPath(); ctx.arc(c.x, c.y, pulse, 0, Math.PI * 2); ctx.fill();
         });
       } else {
-        /* drifting field, shared by hulk / wakanda / cap / default */
+        /* drifting field, shared by hulk / wakanda / cap / quicksilver / default */
         particles.forEach(function(p){
+          if(realm === 'quicksilver'){ p.prevX = p.x; p.prevY = p.y; }
           p.x += p.vx; p.y += p.vy;
           if(realm === 'hulk'){ p.vx += (Math.random() - 0.5) * 0.01; }
-          if(p.x < -10) p.x = W + 10; if(p.x > W + 10) p.x = -10;
+          if(p.x < -10){ p.x = W + 10; if(realm === 'quicksilver') p.prevX = p.x; }
+          if(p.x > W + 10){ p.x = -10; if(realm === 'quicksilver') p.prevX = p.x; }
           if(p.y < -10){ Object.assign(p, makeParticle(false)); p.y = H + 10; }
           if(p.y > H + 10){ if(realm === 'hulk'){ Object.assign(p, makeParticle(true)); } else { p.y = -10; } }
           var a = p.baseA * (0.55 + 0.45 * Math.sin(t * 0.02 * p.speed + p.phase));
-          drawParticle(p, a);
+          if(realm === 'quicksilver'){
+            var grad = ctx.createLinearGradient(p.prevX, p.prevY, p.x, p.y);
+            grad.addColorStop(0, 'rgba(' + p.rgb + ',0)');
+            grad.addColorStop(1, 'rgba(' + p.rgb + ',' + a.toFixed(3) + ')');
+            ctx.strokeStyle = grad; ctx.lineWidth = p.r; ctx.lineCap = 'round';
+            ctx.shadowColor = 'rgba(' + p.rgb + ',0.8)'; ctx.shadowBlur = p.r * 2.5;
+            ctx.beginPath(); ctx.moveTo(p.prevX, p.prevY); ctx.lineTo(p.x, p.y); ctx.stroke();
+            ctx.shadowBlur = 0;
+          } else {
+            drawParticle(p, a);
+          }
         });
 
         if(realm === 'wakanda'){
